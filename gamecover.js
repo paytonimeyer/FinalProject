@@ -9,23 +9,31 @@ var r4 = 0;
 var r5 = 0;
 var r6 = 0;
 var r7 = 0;
+var r8 = 0;
+var r9 = 0;
+var r10 = 0;
+var r11 = 0;
+var r12 = 0;
 
 function preload(){
-cover = loadImage("assets/bjork-cover.jpg");
-greenPlanet = loadImage("assets/green-planet.png");
-saturnPlanet = loadImage("assets/saturn-planet.png");
-purplePlanet = loadImage("assets/purple-planet.png");
-redPlanet = loadImage("assets/red-planet.png");
-bluePlanet = loadImage("assets/blue-planet.png");
-blueRing = loadImage("assets/blue-ring.png");
-drkblueRing = loadImage("assets/drkblue-ring.png");
-gameTitle= loadImage("assets/game-title.png");
-
+  cover = loadImage("assets/bjork-cover.jpg");
+  greenPlanet = loadImage("assets/green-planet.png");
+  saturnPlanet = loadImage("assets/saturn-planet.png");
+  purplePlanet = loadImage("assets/purple-planet.png");
+  redPlanet = loadImage("assets/red-planet.png");
+  bluePlanet = loadImage("assets/blue-planet.png");
+  bigbluePlanet = loadImage("assets/bigblue-planet.png");
+  blueRing = loadImage("assets/blue-ring.png");
+  drkblueRing = loadImage("assets/drkblue-ring.png");
+  bigRing = loadImage("assets/big-ring.png");
+  gameTitle = loadImage("assets/game-title.png");
+  play = loadImage("assets/play.png");
+  plankTopIMG = loadImage("assets/plank-top.png");
+  plankBottomIMG = loadImage("assets/plank-bottom.png");
 }
 
 function gameCover(){
 
-  //image(cover, 0, 0);
 
   //drkblue Ring
   push();
@@ -36,6 +44,15 @@ function gameCover(){
   r7 -=.05;
   pop();
 
+  //big Ring
+  push();
+  translate(width/2, height/2);
+  rotate(radians(r11));
+  imageMode(CENTER);
+  image(bigRing, 0, 0);
+  r11 -=.01;
+  pop();
+
   //blue Ring
   push();
   translate(width/2, height/2);
@@ -44,6 +61,7 @@ function gameCover(){
   image(blueRing, 0, 0);
   r6 -=.15;
   pop();
+
 
   //red Planet
   push();
@@ -59,16 +77,17 @@ function gameCover(){
   rotate(radians(r));
   fill(255);
   imageMode(CENTER);
-  image(greenPlanet, 180, 180);
+  image(greenPlanet, 240, 240);
   r +=.5;
 
     //rotate moon around green planet
     push();
-    translate(180, 180)
-    rotate(radians(r4));
+    translate(240, 240)
+    rotate(radians(r9));
     fill(255);
-    ellipse(50,50,10,10);
-    r4 +=5;
+    noStroke();
+    ellipse(50,50,15,15);
+    r9 +=2;
     pop();
 
   pop();
@@ -78,7 +97,7 @@ function gameCover(){
   translate(width/2, height/2);
   rotate(radians(r2));
   imageMode(CENTER);
-  image(saturnPlanet, -200, 100);
+  image(saturnPlanet, -170, 170);
   r2 +=.5;
   pop();
 
@@ -87,17 +106,48 @@ function gameCover(){
   translate(width/2, height/2);
   rotate(radians(r2));
   imageMode(CENTER);
-  image(purplePlanet, 200, -100);
+  image(purplePlanet, 180, -180);
   r3 +=.75;
+
+    //moon
+    push();
+    translate(180, -180)
+    rotate(radians(r4));
+    fill(255);
+    noStroke();
+    ellipse(30,30,5,5);
+    r4 +=1;
+    pop();
+
   pop();
 
   //rotate Blue Planet
   push();
   translate(width/2, height/2);
-  rotate(radians(r2));
+  rotate(radians(r10));
   imageMode(CENTER);
-  image(bluePlanet, -250, -250);
-  r5 +=.75;
+  image(bluePlanet, -300, -300);
+  r10 +=.15;
+  pop();
+
+  //rotate Big Blue Planet
+  push();
+  translate(width/2, height/2);
+  rotate(radians(r12));
+  imageMode(CENTER);
+  image(bigbluePlanet, 550, -550);
+  r12 +=.05;
+    
+    //moon
+    push();
+    translate(550, -550)
+    rotate(radians(r12));
+    fill(255);
+    noStroke();
+    ellipse(130,130,5,5);
+    r12 +=.05;
+    pop();
+
   pop();
 
   //game Title
@@ -107,7 +157,36 @@ function gameCover(){
   image(gameTitle,0,0);
   pop();
 
-
-
+  startButton();
 
 }
+
+
+function startButton(){
+  fill(189,193,104);
+  noStroke();
+  rectMode(CENTER);
+  rect(width/2, height/2+100, 115, 40, 50);
+
+  fill(229,234,137);
+  noStroke();
+  rectMode(CENTER);
+  rect(width/2, height/2+95, 115, 40, 50);
+
+  translate(width/2, height/2);
+  imageMode(CENTER);
+  image(play, 0, 95);
+
+}
+
+function starBG(){
+  background(30,30,59);  
+  moveStarClass(); 
+}
+
+function startScreen(){
+  gameCover();
+
+}
+
+
