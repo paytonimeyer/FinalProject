@@ -1,111 +1,87 @@
 
+//Game State Booleans
 var state1 = true;
 var gamePlayBool = false;
-var gameOver = false;
+var gameOverBool = false;
 
 
-var ground;
-var groundImg;
-var bjork;
 
-var bigRedPlanet;
-var bigRedPlanetImg;
-
-//var platform;
-
-var JUMP = -7;
-
-var score = 0;
-
-
+//Preload Assets
 function preload(){
-  
+
+  //Sound FX
+  music = loadSound("assets/sound/bgMusic.mp3");
+
+  //Title Screen/Game Over Elements
+  cover = loadImage("assets/bjork-cover.jpg");
+  greenPlanet = loadImage("assets/green-planet.png");
+  saturnPlanet = loadImage("assets/saturn-planet.png");
+  purplePlanet = loadImage("assets/purple-planet.png");
+  redPlanet = loadImage("assets/red-planet.png");
+  bluePlanet = loadImage("assets/blue-planet.png");
+  bigbluePlanet = loadImage("assets/bigblue-planet.png");
+  blueRing = loadImage("assets/blue-ring.png");
+  drkblueRing = loadImage("assets/drkblue-ring.png");
+  bigRing = loadImage("assets/big-ring.png");
+  gameTitle = loadImage("assets/game-title.png");
+  gameOverTitle = loadImage("assets/gameover.png");
+
+  //BG Elements
+  bigRedPlanetImg = loadImage("assets/big-red-planet.png");
+  satelliteIMG = loadImage("assets/satellite.png");
+  bigRedPlanetImg = loadImage("assets/big-red-planet.png");
+
+  //Interactive Game elements
+  play = loadImage("assets/play.png");
+  plankTopIMG = loadImage("assets/plank-top.png");
+  plankBottomIMG = loadImage("assets/plank-bottom.png");
+  sugarcubeIMG = loadImage("assets/sugarcube.png");
+
 }
+
 
 function setup() {
-	//createCanvas(640,360); 
-	createCanvas(windowWidth,1000);
+	music.play();
+
+	createCanvas(1500,1000);
 	gridOfStars();
 
-	makePlanks();
-
-	bjork = createSprite(width/2, 0, 248, 348);
-	var bjorkWalk = bjork.addAnimation("walking", "assets/bjork-walk/bjork-walk-20.png", "assets/bjork-walk/bjork-walk-01.png");
-
-	bjork.shapeColor = color(128);
-
-
-	bigRedPlanetImg = loadImage("assets/big-red-planet.png");
-
+  firstPlankSetup();
+	plankSetup();
+	bjorkSetup();
 }
-
 
 function draw() {
+	//Background 
   starRotationBG();
+    //garbageMan(); 
 
-  playButton();
-  gamePlay();
+	//Game States
+	playButton();
+	gamePlay();
+	gameOver();
+
 
 }
 
-
-
-function playButton() {
-	if (state1) {
-  		startScreen();
-  	}
-}
-
-
-function gamePlay() {
-	if (gamePlayBool) {
-
-  //drkblue Ring
-  push();
-  translate(width/2, height*2);
-  rotate(radians(r7));
-  imageMode(CENTER);
-  image(bigRedPlanetImg, 0, 0);
-  r7 -=.05;
-  pop();
-
-		drawSprite(bigRedPlanet);
-
-		//Gravity for Bjork
-		bjork.addSpeed(0.25, 90);
-		//bjork.collide(ground);
-		bjork.collide(plankBottoms);
-
-		//move ground to the left
-		//ground.position.x -=  3;
-	  
-
-		/*if(ground.position.x<0){
-			ground.position.x =   width;
-		}*/
-
-
-		bjork.overlap(sugarcubes, getSugar);
-
-
-		//drawSprite(ground);
-		drawSprite(bjork);
-		//drawSprite(sugarcubes);
-
-		scoreBoard();
-		movePlanks();
-  		
-  		drawSprites();
-
-	}
-}
-
-
+//User Interactions
 function mousePressed(){
+	
  	 //hit start button to play game 
  	 if(mouseX < width/2+60 && mouseX > width/2-60 && mouseY < height/2+115 && mouseY > height/2+75 && state1 === true){
 	    state1 = !state1;
 	    gamePlayBool = !gamePlayBool;
+
+ 	 }
+
+ 	 //hit restart button to restart game
+ 	 if(mouseX < width/2+60 && mouseX > width/2-60 && mouseY < height/2+115 && mouseY > height/2+75 && gameOverBool === true){
+
+	    gamePlayBool = !gamePlayBool;
+	    gameOverBool = !gameOverBool;
+  		gamePlay();
+	    
+	    score = 0;
  	 }
 
   	//Make Bjork jump during gameplay
@@ -113,27 +89,5 @@ function mousePressed(){
 }
 
 
-function getSugar(bjork, sugar) {
-	//if (bjork.overlap(sugarcubes)) {
-    	sugar.remove();
-  		score += 1;
-  	//}
-}
-
-
-function scoreBoard(){
-	fill(255);
-  	noStroke();
-	textSize(72);
-	textAlign(CENTER, CENTER);
-	  
-	if (score < 100) {
-		text(score, width - 75, 75);
-	}
-
-	else {
-		text("you win!", width/2, height/2);
-	}
-}
 
 

@@ -12,16 +12,6 @@ function gridOfStars() {
       var starX = random(width*-1, width);
       var starY = random(height*-1, height);
       var starW = random(0, 5);
-      //var opacityVariance = 2;
-      //var opacityVarianceInverse = 0;
-
-      //gridVariance = dist(xMov,yMov, k, l);
-      //opacityVariance = dist(0,0, k*.6, l*.6);
-
-      //constrain(opacityVariance, 0, 255);
-
-      //Remapping the spotlight so its light in the middle and dark outside(this took forever to figure out lol)
-      //var m = map(opacityVariance, 0, 255, 255, 0);
 
       stargrid[index++] = new Star(starX+i, starY+j, starW);
     }
@@ -74,13 +64,26 @@ function moveStarClass() {
   }
 } 
 
+function starBG(){
+  background(30,30,59);  
+  moveStarClass(); 
+}
+
 function starRotationBG(){
 
   push();
   translate(width/2, height/2);
   rotate(radians(r15));
   starBG();
-  r15 +=.015;
+  r15 -=.015;
   pop();
 
+  push();
+  translate(width/2, height/2);
+  rotate(radians(r15));
+  pushPaintClass();
+  pop();
+
+ //garbageMan();
 }
+

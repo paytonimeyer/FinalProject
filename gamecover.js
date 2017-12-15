@@ -15,25 +15,7 @@ var r10 = 0;
 var r11 = 0;
 var r12 = 0;
 
-function preload(){
-  cover = loadImage("assets/bjork-cover.jpg");
-  greenPlanet = loadImage("assets/green-planet.png");
-  saturnPlanet = loadImage("assets/saturn-planet.png");
-  purplePlanet = loadImage("assets/purple-planet.png");
-  redPlanet = loadImage("assets/red-planet.png");
-  bluePlanet = loadImage("assets/blue-planet.png");
-  bigbluePlanet = loadImage("assets/bigblue-planet.png");
-  blueRing = loadImage("assets/blue-ring.png");
-  drkblueRing = loadImage("assets/drkblue-ring.png");
-  bigRing = loadImage("assets/big-ring.png");
-  gameTitle = loadImage("assets/game-title.png");
-  play = loadImage("assets/play.png");
-  plankTopIMG = loadImage("assets/plank-top.png");
-  plankBottomIMG = loadImage("assets/plank-bottom.png");
-}
-
 function gameCover(){
-
 
   //drkblue Ring
   push();
@@ -97,7 +79,7 @@ function gameCover(){
   translate(width/2, height/2);
   rotate(radians(r2));
   imageMode(CENTER);
-  image(saturnPlanet, -170, 170);
+  image(saturnPlanet, -240, 240);
   r2 +=.5;
   pop();
 
@@ -179,14 +161,13 @@ function startButton(){
 
 }
 
-function starBG(){
-  background(30,30,59);  
-  moveStarClass(); 
-}
-
 function startScreen(){
   gameCover();
-
 }
 
+function playButton() {
+  if (state1) {
+      startScreen();
+    }
+}
 
