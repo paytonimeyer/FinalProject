@@ -84,6 +84,7 @@ function starRotationBG(){
   pushPaintClass();
   pop();
 
+  volumeSwitch();
  //garbageMan();
 }
 

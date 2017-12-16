@@ -7,7 +7,7 @@ var plankYPos = [];
 
 var firstplankBottom;
 var firstplankTop;
-
+var ship;
 
 
 //First Plank that appears during gameplay
@@ -17,17 +17,23 @@ function firstPlankSetup(){
     var firstplankY = height/2+200;
 
 	//First Plank Bottom
-	firstplankBottom = createSprite(firstplankX, firstplankY, 1000, 150);
+	firstplankBottom = createSprite(firstplankX - 250, firstplankY, 1000, 150);
 	firstplankBottom.setCollider("rectangle", 0, 0, 1000, 150);
-	//firstplankBottom.addImage(plankBottomIMG);
-    firstplankBottom.shapeColor = color(127);
+	firstplankBottom.addImage(plankLongBottomIMG);
 
 	//First Plank Top
-	firstplankTop = createSprite(firstplankX, firstplankY - 89, 1000, 30);
+	firstplankTop = createSprite(firstplankX - 250, firstplankY - 89, 1000, 30);
 	firstplankTop.setCollider("rectangle", 0, 0, 1000, 30);
-	//firstplankTop.addImage(plankTopIMG);
-    firstplankTop.shapeColor = color(127);
+	firstplankTop.addImage(plankLongTopIMG);
+
+    //First Plank Top
+	ship = createSprite(firstplankX - 500, firstplankY - 89, 1000, 30);
+	//firstplankTop.setCollider("rectangle", 0, 0, 1000, 30);
+	ship.addImage(shipIMG);
+
+
 }
+
 
 //First Plank removal
 function removeFirstPlank(){
@@ -43,7 +49,14 @@ function removeFirstPlank(){
 			firstplankTop.remove();
 		  	//print(plankBottoms[i].position.x);
 	}
+
+	if (ship.position.x < -500) {
+			//Remove Plank Bottoms when the exit the canvas
+			ship.remove();
+		  	//print(plankBottoms[i].position.x);
+	}
 }
+
 
 //Spawning Plank Groups Setup
 function plankSetup(){
@@ -76,7 +89,7 @@ function makePlanks(){
 		//Sugar Cubes
 		for (var i = 0; i < 300; i+= 100) {
 			var sugar = createSprite((plankX+i-100), plankY - 174, 25, 25);
-	 		sugar.shapeColor = color(215);
+			sugar.setCollider("rectangle", 25, 25, 20, 20);
 	    	sugarcubes.add(sugar);
 			sugar.addImage(sugarcubeIMG);
 

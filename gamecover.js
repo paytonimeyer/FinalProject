@@ -44,6 +44,24 @@ function gameCover(){
   r6 -=.15;
   pop();
 
+  //bjork
+  push();
+  translate(width/2, height/2);
+  rotate(radians(r2));
+  imageMode(CENTER);
+  image(coverbjorkIMG, 0, -155);
+  //r2 +=.5;
+  pop();
+
+  //un
+  push();
+  translate(width/2, height/2);
+  rotate(radians(r2));
+  imageMode(CENTER);
+  image(coverUNIMG, 0, 155);
+  //r2 +=.5;
+  pop();
+
 
   //red Planet
   push();
@@ -56,15 +74,14 @@ function gameCover(){
   //rotate green plant
   push();
   translate(width/2, height/2);
-  rotate(radians(r));
+  rotate(radians(r12));
   fill(255);
   imageMode(CENTER);
-  image(greenPlanet, 240, 240);
-  r +=.5;
+  image(greenPlanet, 300, 300);
 
     //rotate moon around green planet
     push();
-    translate(240, 240)
+    translate(300, 300)
     rotate(radians(r9));
     fill(255);
     noStroke();
@@ -79,7 +96,7 @@ function gameCover(){
   translate(width/2, height/2);
   rotate(radians(r2));
   imageMode(CENTER);
-  image(saturnPlanet, -240, 240);
+  image(saturnPlanet, -250, 0);
   r2 +=.5;
   pop();
 
@@ -88,12 +105,12 @@ function gameCover(){
   translate(width/2, height/2);
   rotate(radians(r2));
   imageMode(CENTER);
-  image(purplePlanet, 180, -180);
+  image(purplePlanet, 250, 0);
   r3 +=.75;
 
     //moon
     push();
-    translate(180, -180)
+    translate(250, 0)
     rotate(radians(r4));
     fill(255);
     noStroke();
@@ -117,16 +134,26 @@ function gameCover(){
   translate(width/2, height/2);
   rotate(radians(r12));
   imageMode(CENTER);
-  image(bigbluePlanet, 550, -550);
+  image(bigbluePlanet, 525, -525);
   r12 +=.05;
     
     //moon
     push();
-    translate(550, -550)
+    translate(525, -525)
     rotate(radians(r12));
     fill(255);
     noStroke();
     ellipse(130,130,5,5);
+    r12 +=.05;
+    pop();
+
+    //moon
+    push();
+    translate(525, -525)
+    rotate(radians(r12));
+    fill(225);
+    noStroke();
+    ellipse(-130,-130,8,8);
     r12 +=.05;
     pop();
 
@@ -140,17 +167,16 @@ function gameCover(){
   pop();
 
   startButton();
-
 }
 
 
 function startButton(){
-  fill(189,193,104);
+  fill(207,159,43);
   noStroke();
   rectMode(CENTER);
   rect(width/2, height/2+100, 115, 40, 50);
 
-  fill(229,234,137);
+  fill(255,208,79);
   noStroke();
   rectMode(CENTER);
   rect(width/2, height/2+95, 115, 40, 50);
