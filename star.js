@@ -6,11 +6,11 @@ var r15 = 0;
 
 function gridOfStars() {
   //For loop to turn my rect object into a grid
-  for (var i = 0; i < 20; i = i + 1) {
-    for (var j = 0; j < 20; j = j + 1){
+  for (var i = 0; i < 5; i = i + 1) {
+    for (var j = 0; j < 5; j = j + 1){
 
-      var starX = random(width*-1, width);
-      var starY = random(height*-1, height);
+      var starX = random(width*-1/2, width/2);
+      var starY = random(height*-1/2, height/2);
       var starW = random(0, 5);
 
       stargrid[index++] = new Star(starX+i, starY+j, starW);
@@ -39,22 +39,15 @@ function Star(tempX, tempY, tempW) {
   //this.cornerVariance = random(5,50);
 
   //the speed in which each corner will soften
-  this.speedCorner = .5;  
+  //this.speedCorner = .5;  
 
   this.show = function() {  
 
-    this.n = noise(this.time)*width/10;
-    this.time = this.time + this.increment;
 
     noStroke();
     fill(255,255,255,27);
-    ellipse(this.xPos, this.yPos, this.ellW+this.n/20)
+    ellipse(this.xPos, this.yPos, this.ellW)
 
-    this.cornerVariance = this.cornerVariance + this.speedCorner;
-
-    if ((this.cornerVariance > 50 || this.cornerVariance < 1 )) {
-      this.speedCorner = this.speedCorner * -1;
-    }
   }
 }
 

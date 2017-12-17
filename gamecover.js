@@ -2,6 +2,7 @@
 var cover;
 var greenPlanet;
 
+
 var r = 0;
 var r2 = 0;
 var r3 = 0;
@@ -57,9 +58,7 @@ function gameCover(){
   push();
   translate(width/2, height/2);
   rotate(radians(r2));
-  imageMode(CENTER);
-  image(coverUNIMG, 0, 155);
-  //r2 +=.5;
+  animation(un, 0, 155,);
   pop();
 
 

@@ -2,6 +2,7 @@ var sugarcubes;
 var plankBottoms;
 var plankTops;
 var cloudX;
+var nukes;
 
 var plankYPos = [];
 
@@ -64,6 +65,7 @@ function plankSetup(){
 	plankBottoms = new Group();
 	plankTops = new Group();
 	sugarcubes = new Group();
+	nukes = new Group();
 }
 
 //Spawn/Kill Planks
@@ -94,8 +96,23 @@ function makePlanks(){
 			sugar.addImage(sugarcubeIMG);
 
 		}
-		plankX -= 3;
+		//plankX -= 3;
     }
+
+    if(score > 2 && frameCount%200 == 0) {
+    	var nukeX = width+200;
+    	var nukeY = random(300, 850);
+
+		//Plank Bottoms
+		var nuke = createSprite(nukeX, nukeY, 137, 78);
+		nuke.addAnimation("nukespin", nukespin);
+		nuke.setCollider("rectangle", 0, 0, 137, 78);
+	    nukes.add(nuke);
+
+		
+		//nukeX -= 4;
+	}
+
 
     //Remove Planks
     for (var i = 0; i < plankBottoms.length; i++) {
@@ -105,7 +122,6 @@ function makePlanks(){
 
 			//Remove Plank Bottoms when the exit the canvas
 			plankBottoms[i].remove();
-		  	//print(plankBottoms[i].position.x);
 		}
 	}
 
@@ -124,6 +140,18 @@ function makePlanks(){
 		//Remove Sugar Cubes when the exit the canvas
 		if (sugarcubes[i].position.x < -500) {
 			sugarcubes[i].remove();
+		}
+	}
+
+
+	for (var i = 0; i < nukes.length; i++) {
+		nukes[i].position.x -= 5;
+		drawSprite(nukes[i]);
+drawSprite(nuke);
+		if (nukes[i].position.x < -500) {
+
+			//Remove Plank Bottoms when the exit the canvas
+			nukes[i].remove();
 		}
 	}
 

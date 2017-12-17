@@ -5,6 +5,9 @@ var gamePlayBool = false;
 var gameOverBool = false;
 var volOnBool = true;
 
+var un;
+//var nukespin;
+ //var unSpin;
 
 //Preload Assets
 function preload(){
@@ -20,7 +23,6 @@ function preload(){
   cover = loadImage("assets/bjork-cover.jpg");
   greenPlanet = loadImage("assets/green-planet.png");
   coverbjorkIMG = loadImage("assets/coverbjork.png");
-  coverUNIMG = loadImage("assets/coverun.png");
   saturnPlanet = loadImage("assets/saturn-planet.png");
   purplePlanet = loadImage("assets/purple-planet.png");
   redPlanet = loadImage("assets/red-planet.png");
@@ -31,6 +33,15 @@ function preload(){
   bigRing = loadImage("assets/big-ring.png");
   gameTitle = loadImage("assets/game-title.png");
   gameOverTitle = loadImage("assets/gameover.png");
+
+
+  //Animated Sprites 
+  un = loadAnimation("assets/un-spin/un-spin-01.png", "assets/un-spin/un-spin-36.png");
+  walking = loadAnimation("assets/bjork-walk/bjork-walk-20.png", "assets/bjork-walk/bjork-walk-01.png");
+  jumpup = loadAnimation("assets/bjork-jump/bjork-jump-01.png", "assets/bjork-jump/bjork-jump-05.png");
+  nukespin = loadAnimation("assets/nuke-spin/nuke-spin-1.png", "assets/nuke-spin/nuke-spin-7.png");
+
+  //var bjorkWalk = bjork.addAnimation("walking", "assets/bjork-walk/bjork-walk-20.png", "assets/bjork-walk/bjork-walk-01.png");
 
   //BG Elements
   bigRedPlanetImg = loadImage("assets/big-red-planet.png");
@@ -46,6 +57,7 @@ function preload(){
   sugarcubeIMG = loadImage("assets/sugarcube.png");
   bigsugarcubeIMG = loadImage("assets/bigsugarcube.png");
   shipIMG = loadImage("assets/ship.png");
+  nukeIMG = loadImage("assets/nuke.png");
 
   //GUI
   volOnIMG = loadImage("assets/vol-on.png");
@@ -62,6 +74,7 @@ function setup() {
   firstPlankSetup();
 	plankSetup();
 	bjorkSetup();
+  //unSetup();
 }
 
 function draw() {
@@ -72,8 +85,6 @@ function draw() {
 	playButton();
 	gamePlay();
 	gameOver();
-
-  //volumeSwitch();
 }
 
 //User Interactions
@@ -111,7 +122,6 @@ function mousePressed(){
         flame.loop();
         flame.setVolume(1);
     }
-
 }
 
 
@@ -120,6 +130,7 @@ function mouseReleased() {
     flame.stop();
   }
 }
+
 
 //User Interactions
 function volumeSwitch(){
