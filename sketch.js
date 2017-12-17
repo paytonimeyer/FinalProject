@@ -18,6 +18,7 @@ function preload(){
   //Sound FX
   musicMain = loadSound("assets/sound/bgMusic.mp3");
   flame = loadSound("assets/sound/flame.mp3");
+  ding = loadSound("assets/sound/ding.mp3");
 
   //Title Screen/Game Over Elements
   cover = loadImage("assets/bjork-cover.jpg");
@@ -37,6 +38,7 @@ function preload(){
 
   //Animated Sprites 
   un = loadAnimation("assets/un-spin/un-spin-01.png", "assets/un-spin/un-spin-36.png");
+  unheadspin = loadAnimation("assets/un-head-spin/un-headspin-01.png", "assets/un-head-spin/un-headspin-36.png");
   walking = loadAnimation("assets/bjork-walk/bjork-walk-20.png", "assets/bjork-walk/bjork-walk-01.png");
   jumpup = loadAnimation("assets/bjork-jump/bjork-jump-01.png", "assets/bjork-jump/bjork-jump-05.png");
   nukespin = loadAnimation("assets/nuke-spin/nuke-spin-1.png", "assets/nuke-spin/nuke-spin-7.png");
@@ -137,12 +139,14 @@ function volumeSwitch(){
 
   if (volOnBool) {
     musicMain.setVolume(0.1);
+    ding.setVolume(0.5);
     vol.changeAnimation("on");
   } 
 
   if (!volOnBool){
     musicMain.setVolume(0.0);
     flame.setVolume(0.0);
+    ding.setVolume(0.0);
     vol.changeAnimation("off");
   }
 

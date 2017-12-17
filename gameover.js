@@ -151,11 +151,14 @@ function gameOver() {
 	  pop();
 
 	  restartButton();
-
 	}
 }
 
 function restartButton(){
+
+       // drawSprites();
+  scoreBoard();
+
   fill(189,193,104);
   noStroke();
   rectMode(CENTER);

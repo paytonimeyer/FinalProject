@@ -45,7 +45,7 @@ function Star(tempX, tempY, tempW) {
 
 
     noStroke();
-    fill(255,255,255,27);
+    fill(255,255,255,127);
     ellipse(this.xPos, this.yPos, this.ellW)
 
   }

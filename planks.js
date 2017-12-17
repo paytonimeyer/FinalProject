@@ -10,6 +10,8 @@ var firstplankBottom;
 var firstplankTop;
 var ship;
 
+var a = 1;
+var inc = 1;
 
 //First Plank that appears during gameplay
 function firstPlankSetup(){
@@ -31,7 +33,6 @@ function firstPlankSetup(){
 	ship = createSprite(firstplankX - 500, firstplankY - 89, 1000, 30);
 	//firstplankTop.setCollider("rectangle", 0, 0, 1000, 30);
 	ship.addImage(shipIMG);
-
 
 }
 
@@ -66,12 +67,13 @@ function plankSetup(){
 	plankTops = new Group();
 	sugarcubes = new Group();
 	nukes = new Group();
+	kimJongUns = new Group();
 }
 
 //Spawn/Kill Planks
 function makePlanks(){
 
-    //spawn planks
+    //Spawn Planks and Sugar
     if(frameCount%200 == 0) {
     	var plankX = width+200;
     	var plankY = random(550, 1000);
@@ -99,7 +101,8 @@ function makePlanks(){
 		//plankX -= 3;
     }
 
-    if(score > 2 && frameCount%200 == 0) {
+    //Spawn Easy Nukes
+    if(score > 10 && score < 30 && frameCount%300 == 0) {
     	var nukeX = width+200;
     	var nukeY = random(300, 850);
 
@@ -108,13 +111,80 @@ function makePlanks(){
 		nuke.addAnimation("nukespin", nukespin);
 		nuke.setCollider("rectangle", 0, 0, 137, 78);
 	    nukes.add(nuke);
-
-		
-		//nukeX -= 4;
 	}
 
+    //Spawn Medium Nukes
+    if(score > 31 && score < 50 && frameCount%200 == 0) {
+    	var nukeX = width+200;
+    	var nukeY = random(300, 850);
 
-    //Remove Planks
+		//Plank Bottoms
+		var nuke = createSprite(nukeX, nukeY, 137, 78);
+		nuke.addAnimation("nukespin", nukespin);
+		nuke.setCollider("rectangle", 0, 0, 137, 78);
+	    nukes.add(nuke);
+	}
+
+    //Spawn Hard Nukes
+    if(score > 51 && score < 70 && frameCount%100 == 0) {
+    	var nukeX = width+200;
+    	var nukeY = random(300, 850);
+
+		//Plank Bottoms
+		var nuke = createSprite(nukeX, nukeY, 137, 78);
+		nuke.addAnimation("nukespin", nukespin);
+		nuke.setCollider("rectangle", 0, 0, 137, 78);
+	    nukes.add(nuke);
+	}
+
+    //Spawn XTRA Hard Nukes
+    if(score > 71 && score < 100 && frameCount%50 == 0) {
+    	var nukeX = width+200;
+    	var nukeY = random(300, 850);
+
+		//Plank Bottoms
+		var nuke = createSprite(nukeX, nukeY, 137, 78);
+		nuke.addAnimation("nukespin", nukespin);
+		nuke.setCollider("rectangle", 0, 0, 137, 78);
+	    nukes.add(nuke);
+	}
+
+	//Spawn easy Kim Jong Un 
+    if(score > 20 && score < 40 && frameCount%500 == 0) {
+    	var nukeX = width+200;
+    	var nukeY = random(300, 850);
+
+		//Plank Bottoms
+		var kimJongUn = createSprite(nukeX, nukeY, 137, 78);
+		kimJongUn.addAnimation("unheadspin", unheadspin);
+		kimJongUn.setCollider("rectangle", 0, 0, 137, 78);
+	    kimJongUns.add(kimJongUn);
+	}
+
+	//Spawn medium Kim Jong Un 
+    if(score > 41 && score < 60 && frameCount%400 == 0) {
+    	var nukeX = width+200;
+    	var nukeY = random(300, 850);
+
+		//Plank Bottoms
+		var kimJongUn = createSprite(nukeX, nukeY, 137, 78);
+		kimJongUn.addAnimation("unheadspin", unheadspin);
+		kimJongUn.setCollider("rectangle", 0, 0, 137, 78);
+	    kimJongUns.add(kimJongUn);
+	}
+
+	//Spawn hard Kim Jong Un 
+    if(score > 61 && score < 80 && frameCount%300 == 0) {
+    	var nukeX = width+200;
+    	var nukeY = random(300, 850);
+
+		//Plank Bottoms
+		var kimJongUn = createSprite(nukeX, nukeY, 137, 78);
+		kimJongUn.addAnimation("unheadspin", unheadspin);
+		kimJongUn.setCollider("rectangle", 0, 0, 137, 78);
+	    kimJongUns.add(kimJongUn);
+	}
+    //......REMOVE ITEMS AFTER EXITING CANVAS.......
     for (var i = 0; i < plankBottoms.length; i++) {
 		plankBottoms[i].position.x -= 3;
 		
@@ -147,7 +217,7 @@ function makePlanks(){
 	for (var i = 0; i < nukes.length; i++) {
 		nukes[i].position.x -= 5;
 		drawSprite(nukes[i]);
-drawSprite(nuke);
+		drawSprite(nuke);
 		if (nukes[i].position.x < -500) {
 
 			//Remove Plank Bottoms when the exit the canvas
@@ -155,6 +225,19 @@ drawSprite(nuke);
 		}
 	}
 
+	for (var i = 0; i < kimJongUns.length; i++) {
+		kimJongUns[i].position.x -= 5;
+		kimJongUns[i].position.y += sin(radians(a*1.97));
+		a -= 1;
+
+		drawSprite(kimJongUns[i]);
+		drawSprite(nuke);
+		if (kimJongUns[i].position.x < -500) {
+
+			//Remove Plank Bottoms when the exit the canvas
+			kimJongUns[i].remove();
+		}
+	}
 }
 
 

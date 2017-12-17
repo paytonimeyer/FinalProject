@@ -1,6 +1,6 @@
 var JUMP = -7;
 var score = 0;
-
+var bjorkSugarBool = false;
 var bjork;
 
 var scoreSugar;
@@ -9,7 +9,7 @@ var scoreSugar;
 
 function bjorkSetup(){
 
-	bjork = createSprite(width/2, height/2, 248, 339);
+	bjork = createSprite(width/2, 200, 248, 339);
 	bjork.setCollider("rectangle", 0, 0, 100, 348);
 	bjork.addAnimation("walking", walking);
 	bjork.addAnimation("jumpup", jumpup);
@@ -32,8 +32,9 @@ function gamePlay() {
     	
     	if(mouseIsPressed) {
     		bjork.changeAnimation("jumpup");
-
 		}
+
+
 
 		//Big Red Planet
 		bigRedPlanetBG();
@@ -48,14 +49,15 @@ function gamePlay() {
 		//Planks
 		makePlanks();
 
-
 		//Gravity for Bjork
 		bjork.addSpeed(0.25, 90);
+
 		//bjork.collide(ground);
 		ship.collide(firstplankBottom);
 		bjork.collide(firstplankBottom);
 		bjork.collide(plankBottoms);
 		bjork.collide(nukes);
+		bjork.collide(kimJongUns);
 		//Bjork Eats Sugar
 		bjork.overlap(sugarcubes, getSugar);
 		//Bjork Falls
@@ -70,10 +72,9 @@ function gamePlay() {
 
 //Remove sugar when Bjork collides/Increase score by 1
 function getSugar(bjork, sugar) {
-
     	sugar.remove();
   		score += 1;
-
+  		ding.play();
 }
 
 //Display Scoreboard
@@ -85,20 +86,42 @@ function scoreBoard(){
   	textFont(brandon);
 	textSize(72);
 	textAlign(CENTER, CENTER);
-	  
-	if (score < 100) {
+
+	text(score, width - 75, 55);	  
+	/*if (score < 100) {
 		text(score, width - 75, 55);
 	}
 
 	else {
 		text("you win!", width/2, height/2);
+	}*/
+}
+
+function highScore(){
+	drawSprite(scoreSugar);
+
+	fill(255);
+  	noStroke();
+  	textFont(brandon);
+	textSize(72);
+	textAlign(CENTER, CENTER);
+	text(score, width - 75, 55);	  
+	/*if (score < 100) {
+		text(score, width - 75, 55);
 	}
+
+	else {
+		text("you win!", width/2, height/2);
+	}*/
 }
 
 function bjorkFalls() {
  	if(bjork.position.y > 1100 || bjork.position.x < -100){
-		bjork.position.y = -500;
+ 		push();
+		bjork.position.y = 100;
  		bjork.position.x = width/2;
+ 		bjork.addSpeed(0, 0);
+ 		pop();
  		gamePlayBool = false;
 	    gameOverBool = true;
  	}
