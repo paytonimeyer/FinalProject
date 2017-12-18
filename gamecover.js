@@ -17,6 +17,16 @@ var r10 = 0;
 var r11 = 0;
 var r12 = 0;
 
+//Button TOP RGB Vars
+var btnTopR = 255;
+var btnTopG = 208;
+var btnTopB = 79;
+
+//Button TOP RGB Vars
+var btnBtmR = 207;
+var btnBtmG = 159;
+var btnBtmB = 43;
+
 function gameCover(){
 
   //drkblue Ring
@@ -173,13 +183,13 @@ function gameCover(){
 //start button funtion
 function startButton(){
   //holding shape bevel
-  fill(207,159,43);
+  fill(btnBtmR, btnBtmG, btnBtmB);
   noStroke();
   rectMode(CENTER);
   rect(width/2, height/2+100, 115, 40, 50);
 
   //holding shape
-  fill(255,208,79);
+  fill(btnTopR, btnTopG, btnTopB);
   noStroke();
   rectMode(CENTER);
   rect(width/2, height/2+95, 115, 40, 50);
@@ -188,6 +198,17 @@ function startButton(){
   translate(width/2, height/2);
   imageMode(CENTER);
   image(play, 0, 95);
+
+  //Rollover State brightens button
+  if(mouseX < width/2+60 && mouseX > width/2-60 && mouseY < height/2+115 && mouseY > height/2+75 && state1 === true){
+    btnTopR = 255;
+    btnTopG = 225;
+    btnTopB = 115;
+  } else {
+    btnTopR = 255;
+    btnTopG = 208;
+    btnTopB = 79;
+  }
 }
 
 

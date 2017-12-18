@@ -160,13 +160,13 @@ function restartButton(){
   scoreBoard();
 
   //holding shape bevel
-  fill(207,159,43);
+  fill(btnBtmR, btnBtmG, btnBtmB);
   noStroke();
   rectMode(CENTER);
   rect(width/2, height/2+100, 115, 40, 50);
 
   //holding shape
-  fill(255,208,79);
+  fill(btnTopR, btnTopG, btnTopB);
   noStroke();
   rectMode(CENTER);
   rect(width/2, height/2+95, 115, 40, 50);
@@ -175,5 +175,16 @@ function restartButton(){
   translate(width/2, height/2);
   imageMode(CENTER);
   image(play, 0, 95);
+
+    //Rollover State brightens button
+  if(mouseX < width/2+60 && mouseX > width/2-60 && mouseY < height/2+115 && mouseY > height/2+75 && gameOverBool === true){
+    btnTopR = 255;
+    btnTopG = 225;
+    btnTopB = 115;
+  } else {
+    btnTopR = 255;
+    btnTopG = 208;
+    btnTopB = 79;
+  }
 
 }
