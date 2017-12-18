@@ -6,8 +6,8 @@ var nukes;
 
 var plankYPos = [];
 
-var firstplankBottom;
-var firstplankTop;
+//var firstplankBottom;
+//var firstplankTop;
 var ship;
 
 var a = 1;
@@ -20,24 +20,88 @@ function firstPlankSetup(){
     var firstplankY = height/2+200;
 
 	//First Plank Bottom
-	firstplankBottom = createSprite(firstplankX - 250, firstplankY, 1000, 150);
+	var firstplankBottom = createSprite(firstplankX - 250, firstplankY, 1000, 150);
 	firstplankBottom.setCollider("rectangle", 0, 0, 1000, 150);
+	firstplankBottoms.add(firstplankBottom);
 	firstplankBottom.addImage(plankLongBottomIMG);
 
 	//First Plank Top
-	firstplankTop = createSprite(firstplankX - 250, firstplankY - 89, 1000, 30);
+	var firstplankTop = createSprite(firstplankX - 250, firstplankY - 89, 1000, 30);
 	firstplankTop.setCollider("rectangle", 0, 0, 1000, 30);
+	firstplankTops.add(firstplankTop);
 	firstplankTop.addImage(plankLongTopIMG);
 
-    //First Plank Top
-	ship = createSprite(firstplankX - 500, firstplankY - 89, 1000, 30);
-	//firstplankTop.setCollider("rectangle", 0, 0, 1000, 30);
+	//Ship
+	var ship = createSprite(firstplankX - 500, firstplankY - 89, 273, 483);
+	ship.setCollider("rectangle", 0, 0, 273, 483);
+	ships.add(ship);
 	ship.addImage(shipIMG);
+
+
+	//Move/Remove First Plank Bottom
+	for (var i = 0; i < firstplankBottoms.length; i++) {
+		firstplankBottoms[i].position.x -= 3;
+		//Remove Sugar Cubes when the exit the canvas
+		if (firstplankBottoms[i].position.x < -500) {
+			firstplankBottoms[i].remove();
+		}
+	}
+
+
+	//Move/Remove First Plank Top
+	for (var i = 0; i < firstplankTops.length; i++) {
+		firstplankTops[i].position.x -= 3;
+		//Remove Sugar Cubes when the exit the canvas
+		if (firstplankTops[i].position.x < -500) {
+			firstplankTops[i].remove();
+		}
+	}
+
+
+	//Move/Remove Ship
+	for (var i = 0; i < ships.length; i++) {
+		ships[i].position.x -= 3;
+		//Remove Sugar Cubes when the exit the canvas
+		if (ships[i].position.x < -500) {
+			ships[i].remove();
+		}
+	}
 
 }
 
+function moveFirstPlank(){
+	//Move/Remove First Plank Bottom
+	for (var i = 0; i < firstplankBottoms.length; i++) {
+		firstplankBottoms[i].position.x -= 3;
+		//Remove Sugar Cubes when the exit the canvas
+		if (firstplankBottoms[i].position.x < -500) {
+			firstplankBottoms[i].remove();
+		}
+	}
 
-//First Plank removal
+
+	//Move/Remove First Plank Top
+	for (var i = 0; i < firstplankTops.length; i++) {
+		firstplankTops[i].position.x -= 3;
+		//Remove Sugar Cubes when the exit the canvas
+		if (firstplankTops[i].position.x < -500) {
+			firstplankTops[i].remove();
+		}
+	}
+
+
+	//Move/Remove Ship
+	for (var i = 0; i < ships.length; i++) {
+		ships[i].position.x -= 3;
+		//Remove Sugar Cubes when the exit the canvas
+		if (ships[i].position.x < -500) {
+			ships[i].remove();
+		}
+	}
+}
+
+
+/*//First Plank removal
 function removeFirstPlank(){
 
 	if (firstplankBottom.position.x < -500) {
@@ -57,11 +121,18 @@ function removeFirstPlank(){
 			ship.remove();
 		  	//print(plankBottoms[i].position.x);
 	}
-}
+}*/
 
 
 //Spawning Plank Groups Setup
 function plankSetup(){
+
+	bjorks = new Group();
+
+	ships = new Group();
+	firstplankBottoms = new Group();
+	firstplankTops = new Group();
+
 
 	plankBottoms = new Group();
 	plankTops = new Group();
@@ -240,6 +311,38 @@ function makePlanks(){
 	}
 }
 
+function removeObstacles(){
+    for (var i = 0; i < plankBottoms.length; i++) {
+
+			plankBottoms[i].remove();
+		}
+	
+
+	for (var i = 0; i < plankTops.length; i++) {
+
+			plankTops[i].remove();
+		}
+	
+	
+	for (var i = 0; i < sugarcubes.length; i++) {
+
+			sugarcubes[i].remove();
+		}
+	
+
+
+	for (var i = 0; i < nukes.length; i++) {
+
+			nukes[i].remove();
+		}
+	
+
+	for (var i = 0; i < kimJongUns.length; i++) {
+
+			kimJongUns[i].remove();
+		}
+	
+}
 
 //......FISRT APPROACH WHICH WAS PROBLEMATI... SO I DUMPED IT.......//
 

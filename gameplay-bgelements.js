@@ -20,10 +20,13 @@ function bigRedPlanetBG(){
 		translate(0, 0);
 		rotate(radians(r7));
 		imageMode(CENTER);
-		image(satelliteIMG, 600, -1550);
+		animation(satellitespin, 0, -1550,);
+		//image(satelliteIMG, 600, -1550);
 		//r7 -=.05;
 		pop();
-
+ 
 	pop();
+
+
 
 }

@@ -42,6 +42,7 @@ function preload(){
   walking = loadAnimation("assets/bjork-walk/bjork-walk-20.png", "assets/bjork-walk/bjork-walk-01.png");
   jumpup = loadAnimation("assets/bjork-jump/bjork-jump-01.png", "assets/bjork-jump/bjork-jump-05.png");
   nukespin = loadAnimation("assets/nuke-spin/nuke-spin-1.png", "assets/nuke-spin/nuke-spin-7.png");
+  satellitespin = loadAnimation("assets/satellite-rotate/satellite-rotate-01.png", "assets/satellite-rotate/satellite-rotate-20.png");
 
   //var bjorkWalk = bjork.addAnimation("walking", "assets/bjork-walk/bjork-walk-20.png", "assets/bjork-walk/bjork-walk-01.png");
 
@@ -73,9 +74,10 @@ function setup() {
 	createCanvas(1500,1000);
 	gridOfStars();
 
-  firstPlankSetup();
+  //firstPlankSetup();
 	plankSetup();
-	bjorkSetup();
+  volSugarSetup();
+	//bjorkSetup();
   //unSetup();
 }
 
@@ -101,21 +103,28 @@ function mousePressed(){
  	 if(mouseX < width/2+60 && mouseX > width/2-60 && mouseY < height/2+115 && mouseY > height/2+75 && state1 === true){
 	    state1 = !state1;
 	    gamePlayBool = !gamePlayBool;
+      firstPlankSetup();
+      bjorkSetup();
  	 }
 
  	 //hit restart button to restart game
  	 if(mouseX < width/2+60 && mouseX > width/2-60 && mouseY < height/2+115 && mouseY > height/2+75 && gameOverBool === true){
 
-	    gamePlayBool = !gamePlayBool;
-	    gameOverBool = !gameOverBool;
+	    gamePlayBool = true;
+	    gameOverBool = false;
   		gamePlay();
 	    
 	    score = 0;
+      firstPlankSetup();
+      bjorkSetup();
  	 }
     
     //Make Bjork jump during gameplay
     if(gamePlayBool) {
-      bjork.velocity.y = JUMP;
+
+      for (var i = 0; i < bjorks.length; i++) {
+        bjorks[i].velocity.y = JUMP;
+      }
     }
     
     //Play flame sound effect if Volume is on

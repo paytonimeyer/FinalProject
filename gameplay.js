@@ -1,7 +1,7 @@
 var JUMP = -7;
 var score = 0;
 var bjorkSugarBool = false;
-var bjork;
+//var bjork;
 
 var scoreSugar;
 //var bjorks;
@@ -9,11 +9,15 @@ var scoreSugar;
 
 function bjorkSetup(){
 
-	bjork = createSprite(width/2, 200, 248, 339);
+	var bjork = createSprite(width/2, 200, 248, 339);
 	bjork.setCollider("rectangle", 0, 0, 100, 348);
+	bjorks.add(bjork);
 	bjork.addAnimation("walking", walking);
 	bjork.addAnimation("jumpup", jumpup);
 
+}
+
+function volSugarSetup(){
 	scoreSugar = createSprite(width - 175, 70, 70, 70);
 	scoreSugar.addImage(bigsugarcubeIMG);
 
@@ -23,15 +27,18 @@ function bjorkSetup(){
 	var volOff = vol.addAnimation("off", "assets/vol-off.png");
 }
 
-
 function gamePlay() {
 
 	if (gamePlayBool) {
 
-    	bjork.changeAnimation("walking");
+		for (var i = 0; i < bjorks.length; i++) {
+			bjorks[i].changeAnimation("walking");
+		}
     	
     	if(mouseIsPressed) {
-    		bjork.changeAnimation("jumpup");
+	    	for (var i = 0; i < bjorks.length; i++) {
+				bjorks[i].changeAnimation("jumpup");
+			}
 		}
 
 
@@ -41,31 +48,34 @@ function gamePlay() {
 		drawSprite(bigRedPlanet);
 
 		//Move Initial Plank
-  		firstplankBottom.position.x -= 3;
-    	firstplankTop.position.x -= 3;
-    	ship.position.x -= 3;
-		removeFirstPlank();
+  		//firstplankBottoms.position.x -= 3;
+    	//firstplankTops.position.x -= 3;
+    	//ships.position.x -= 3;
+		//removeFirstPlank();
+		moveFirstPlank();
 
 		//Planks
 		makePlanks();
 
 		//Gravity for Bjork
-		bjork.addSpeed(0.25, 90);
+	    	for (var i = 0; i < bjorks.length; i++) {
+				bjorks[i].addSpeed(0.25, 90);
+			}
 
 		//bjork.collide(ground);
-		ship.collide(firstplankBottom);
-		bjork.collide(firstplankBottom);
-		bjork.collide(plankBottoms);
-		bjork.collide(nukes);
-		bjork.collide(kimJongUns);
+		ships.collide(firstplankBottoms);
+		bjorks.collide(firstplankBottoms);
+		bjorks.collide(plankBottoms);
+		bjorks.collide(nukes);
+		bjorks.collide(kimJongUns);
 		//Bjork Eats Sugar
-		bjork.overlap(sugarcubes, getSugar);
+		bjorks.overlap(sugarcubes, getSugar);
 		//Bjork Falls
 		bjorkFalls();
 
   		drawSprites();
   		scoreBoard();
-		drawSprite(bjork);
+		drawSprites(bjorks);
 
 	}
 }
@@ -116,13 +126,48 @@ function highScore(){
 }
 
 function bjorkFalls() {
- 	if(bjork.position.y > 1100 || bjork.position.x < -100){
- 		push();
-		bjork.position.y = 100;
- 		bjork.position.x = width/2;
- 		bjork.addSpeed(0, 0);
- 		pop();
- 		gamePlayBool = false;
-	    gameOverBool = true;
- 	}
+	for (var i = 0; i < bjorks.length; i++) {
+
+	 	if(bjorks[i].position.y > 1100 || bjorks[i].position.x < -100){
+			bjorks[i].remove();
+	 		gamePlayBool = false;
+		    gameOverBool = true;
+		    //removeObstacles();
+
+		    for (var i = plankBottoms.length - 1; i >=0; i--) {
+				plankBottoms[i].remove();
+			}
+	
+			for (var i = plankTops.length -1; i >=0; i--) {
+				plankTops[i].remove();
+			}
+		
+			for (var i = sugarcubes.length - 1; i >=0; i--) {
+				sugarcubes[i].remove();
+			}
+	
+			for (var i = nukes.length - 1; i >=0; i--) {
+				nukes[i].remove();
+			}
+	
+			for (var i = kimJongUns.length - 1; i >=0; i--) {
+				kimJongUns[i].remove();
+			}
+			
+			for (var i = firstplankBottoms.length - 1; i >=0; i--) {
+				firstplankBottoms[i].remove();
+			}
+	
+			for (var i = firstplankTops.length-1; i >=0; i--) {
+				firstplankTops[i].remove();
+			}
+	
+			for (var i = ships.length- 1; i >=0;  i--) {
+				ships[i].remove();
+			}
+
+ 		} 
+	}
 }
+
+
