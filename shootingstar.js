@@ -1,13 +1,15 @@
+//...SHOOTING STARS...// 
+
 //Paint tree array position 
 var xMov = 500;
 var yMov = 500;
 var starW = 0;
 
 //Paint array
-var paint = [];
+var shootingStar = [];
 
-//Paint Class
-function Paint(tempX, tempY) {
+//Shooting Stars
+function ShootingStar(tempX, tempY) {
   //location
   this.x = tempX;
   this.y = tempY;
@@ -35,21 +37,20 @@ function Paint(tempX, tempY) {
   }
 }
 
-function pushPaintClass() {
+function pushShootingStarsClass() {
+  //second intervals will determine when the shooting stars appear
   var s = second();
 
-
+  //shooting star intervals 
   if(s>5 && s<10 || s>20 && s<25 || s>35 && s<40){
-    paint.push(new Paint(xMov, yMov, 127));
+    shootingStar.push(new ShootingStar(xMov, yMov, 127));
   }
   //starW +=1;
 
   yMov -= 5;
   xMov -= 1;
-  //Constrain 
-  //xMov = constrain(xMov,-1000,1000);
-  //yMov = constrain(yMov,-1000,1000);
 
+  //Restart the Shooting star if the have exited the rotating canvas
   if (xMov > 750 || xMov < -750){
     xMov = random(-750,750);
     yMov = random(-600,600);
@@ -60,15 +61,15 @@ function pushPaintClass() {
     yMov = random(-600,600);
   }
 
-  for (var i = paint.length-1; i >= 0; i--) {
-    paint[i].show();
+  for (var i = shootingStar.length-1; i >= 0; i--) {
+    shootingStar[i].show();
   }
 
   //Constrain lines to 15 at a time
-  if (paint.length > 50){
-    paint.splice(0,1); 
+  if (shootingStar.length > 50){
+    shootingStar.splice(0,1); 
   }
 
-print(s);
+//print(s);
 }
 

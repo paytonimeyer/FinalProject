@@ -1,3 +1,6 @@
+//...PLANKS/SUGAR/NUKES/UNS...// 
+
+//Main Group Vars
 var sugarcubes;
 var plankBottoms;
 var plankTops;
@@ -6,16 +9,15 @@ var nukes;
 
 var plankYPos = [];
 
-//var firstplankBottom;
-//var firstplankTop;
 var ship;
 
+//sine wavey wavey vars
 var a = 1;
 var inc = 1;
 
 //First Plank that appears during gameplay
 function firstPlankSetup(){
-
+	//first plank locations
     var firstplankX = width/2+300;
     var firstplankY = height/2+200;
 
@@ -99,30 +101,6 @@ function moveFirstPlank(){
 		}
 	}
 }
-
-
-/*//First Plank removal
-function removeFirstPlank(){
-
-	if (firstplankBottom.position.x < -500) {
-			//Remove Plank Bottoms when the exit the canvas
-			firstplankBottom.remove();
-		  	//print(plankBottoms[i].position.x);
-	}
-
-	if (firstplankTop.position.x < -500) {
-			//Remove Plank Bottoms when the exit the canvas
-			firstplankTop.remove();
-		  	//print(plankBottoms[i].position.x);
-	}
-
-	if (ship.position.x < -500) {
-			//Remove Plank Bottoms when the exit the canvas
-			ship.remove();
-		  	//print(plankBottoms[i].position.x);
-	}
-}*/
-
 
 //Spawning Plank Groups Setup
 function plankSetup(){
@@ -313,38 +291,31 @@ function makePlanks(){
 
 function removeObstacles(){
     for (var i = 0; i < plankBottoms.length; i++) {
-
 			plankBottoms[i].remove();
 		}
-	
 
 	for (var i = 0; i < plankTops.length; i++) {
-
 			plankTops[i].remove();
 		}
 	
-	
 	for (var i = 0; i < sugarcubes.length; i++) {
-
 			sugarcubes[i].remove();
 		}
-	
-
 
 	for (var i = 0; i < nukes.length; i++) {
-
 			nukes[i].remove();
 		}
 	
-
 	for (var i = 0; i < kimJongUns.length; i++) {
-
 			kimJongUns[i].remove();
 		}
-	
 }
 
-//......FISRT APPROACH WHICH WAS PROBLEMATI... SO I DUMPED IT.......//
+
+//......FISRT APPROACH WHICH WAS PROBLEMATIC... SO I DUMPED IT.......//
+
+//......CODE GRAVEYARD.......//
+
 
 /*//Move all the planks across the canvas
 function movePlanks(){
@@ -429,3 +400,26 @@ function movePlanks(){
 		}
 	}
 }*/
+
+/*//First Plank removal
+function removeFirstPlank(){
+
+	if (firstplankBottom.position.x < -500) {
+			//Remove Plank Bottoms when the exit the canvas
+			firstplankBottom.remove();
+		  	//print(plankBottoms[i].position.x);
+	}
+
+	if (firstplankTop.position.x < -500) {
+			//Remove Plank Bottoms when the exit the canvas
+			firstplankTop.remove();
+		  	//print(plankBottoms[i].position.x);
+	}
+
+	if (ship.position.x < -500) {
+			//Remove Plank Bottoms when the exit the canvas
+			ship.remove();
+		  	//print(plankBottoms[i].position.x);
+	}
+}*/
+

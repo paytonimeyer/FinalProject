@@ -1,8 +1,9 @@
+//...GAME COVER...// 
 
 var cover;
 var greenPlanet;
 
-
+//radian variables
 var r = 0;
 var r2 = 0;
 var r3 = 0;
@@ -169,22 +170,26 @@ function gameCover(){
 }
 
 
+//start button funtion
 function startButton(){
+  //holding shape bevel
   fill(207,159,43);
   noStroke();
   rectMode(CENTER);
   rect(width/2, height/2+100, 115, 40, 50);
 
+  //holding shape
   fill(255,208,79);
   noStroke();
   rectMode(CENTER);
   rect(width/2, height/2+95, 115, 40, 50);
 
+  //play image
   translate(width/2, height/2);
   imageMode(CENTER);
   image(play, 0, 95);
-
 }
+
 
 function startScreen(){
   gameCover();

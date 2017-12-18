@@ -1,12 +1,12 @@
+//...GAMEPLAY...// 
+
+//Gameplay variables 
 var JUMP = -7;
 var score = 0;
 var bjorkSugarBool = false;
-//var bjork;
-
 var scoreSugar;
-//var bjorks;
 
-
+//Initialize bjork sprite animations in setup
 function bjorkSetup(){
 
 	var bjork = createSprite(width/2, 200, 248, 339);
@@ -14,43 +14,40 @@ function bjorkSetup(){
 	bjorks.add(bjork);
 	bjork.addAnimation("walking", walking);
 	bjork.addAnimation("jumpup", jumpup);
-
 }
 
+//Initialize volume and sugar sprites in setup
 function volSugarSetup(){
 	scoreSugar = createSprite(width - 175, 70, 70, 70);
 	scoreSugar.addImage(bigsugarcubeIMG);
-
 
 	vol = createSprite(75, 70, 70, 70);
 	var volOn = vol.addAnimation("on", "assets/vol-on.png");
 	var volOff = vol.addAnimation("off", "assets/vol-off.png");
 }
 
+//GAMEPLAY
 function gamePlay() {
 
+	//If user is in gameplay mode, run the following 
 	if (gamePlayBool) {
 
+		//by default, Bjork should be walking
 		for (var i = 0; i < bjorks.length; i++) {
 			bjorks[i].changeAnimation("walking");
 		}
     	
+    	//when mouse is pressed, display rocket boost
     	if(mouseIsPressed) {
 	    	for (var i = 0; i < bjorks.length; i++) {
 				bjorks[i].changeAnimation("jumpup");
 			}
 		}
 
-
-
-		//Big Red Planet
+		//Display Big Red Planet BG Element
 		bigRedPlanetBG();
 		drawSprite(bigRedPlanet);
 
-		//Move Initial Plank
-  		//firstplankBottoms.position.x -= 3;
-    	//firstplankTops.position.x -= 3;
-    	//ships.position.x -= 3;
 		//removeFirstPlank();
 		moveFirstPlank();
 
@@ -58,25 +55,32 @@ function gamePlay() {
 		makePlanks();
 
 		//Gravity for Bjork
-	    	for (var i = 0; i < bjorks.length; i++) {
-				bjorks[i].addSpeed(0.25, 90);
-			}
+	    for (var i = 0; i < bjorks.length; i++) {
+			bjorks[i].addSpeed(0.25, 90);
+		}
 
-		//bjork.collide(ground);
+		//Collision functions
 		ships.collide(firstplankBottoms);
 		bjorks.collide(firstplankBottoms);
 		bjorks.collide(plankBottoms);
 		bjorks.collide(nukes);
 		bjorks.collide(kimJongUns);
-		//Bjork Eats Sugar
+		//Bjork Eats Sugar Function
 		bjorks.overlap(sugarcubes, getSugar);
 		//Bjork Falls
 		bjorkFalls();
 
   		drawSprites();
+  		//Display Score
   		scoreBoard();
 		drawSprites(bjorks);
 
+		//User Messages
+		clickToJump();
+		avoidUnsNukes();
+		killingIt();
+		youreDoingGreat();
+		unbelievable();
 	}
 }
 
@@ -89,24 +93,79 @@ function getSugar(bjork, sugar) {
 
 //Display Scoreboard
 function scoreBoard(){
+	//Sugar Cube Sprite
 	drawSprite(scoreSugar);
-
+	//Actual score 
 	fill(255);
   	noStroke();
   	textFont(brandon);
 	textSize(72);
 	textAlign(CENTER, CENTER);
-
 	text(score, width - 75, 55);	  
-	/*if (score < 100) {
-		text(score, width - 75, 55);
-	}
-
-	else {
-		text("you win!", width/2, height/2);
-	}*/
 }
 
+//......Messages to be displayed to user during gameplay......//
+function clickToJump(){
+
+	if (score < 3){
+		fill(255);
+	  	noStroke();
+	  	textFont(brandonBold);
+		textSize(22);
+		textAlign(CENTER, CENTER);
+		text("CLICK THE MOUSE TO JUMP UP!", width/2, 65);	
+	}
+}
+
+function avoidUnsNukes(){
+
+	if (score > 10 && score < 13){
+		fill(255);
+	  	noStroke();
+	  	textFont(brandonBold);
+		textSize(22);
+		textAlign(CENTER, CENTER);
+		text("AVOID KIM JONG UN AND HIS NUKES!", width/2, 65);	
+	}
+}
+
+function youreDoingGreat(){
+
+	if (score > 25 && score < 28){
+		fill(255);
+	  	noStroke();
+	  	textFont(brandonBold);
+		textSize(22);
+		textAlign(CENTER, CENTER);
+		text("YOU'RE DOING GREAT!", width/2, 65);	
+	}
+}
+
+function killingIt(){
+
+	if (score > 50 && score < 53){
+		fill(255);
+	  	noStroke();
+	  	textFont(brandonBold);
+		textSize(22);
+		textAlign(CENTER, CENTER);
+		text("KILLING IT!", width/2, 65);	
+	}
+}
+
+function unbelievable(){
+
+	if (score > 75 && score < 78){
+		fill(255);
+	  	noStroke();
+	  	textFont(brandonBold);
+		textSize(22);
+		textAlign(CENTER, CENTER);
+		text("UNBELIEVABLE! KEEP IT UP!", width/2, 65);	
+	}
+}
+
+//Score
 function highScore(){
 	drawSprite(scoreSugar);
 
@@ -116,15 +175,11 @@ function highScore(){
 	textSize(72);
 	textAlign(CENTER, CENTER);
 	text(score, width - 75, 55);	  
-	/*if (score < 100) {
-		text(score, width - 75, 55);
-	}
 
-	else {
-		text("you win!", width/2, height/2);
-	}*/
 }
 
+
+//Game ends when Bjork gets pushed off screen.... Kill everything in gameplay mode/set to gameover mode
 function bjorkFalls() {
 	for (var i = 0; i < bjorks.length; i++) {
 
@@ -132,8 +187,8 @@ function bjorkFalls() {
 			bjorks[i].remove();
 	 		gamePlayBool = false;
 		    gameOverBool = true;
-		    //removeObstacles();
-
+		    
+		    //remove all objects from canvas
 		    for (var i = plankBottoms.length - 1; i >=0; i--) {
 				plankBottoms[i].remove();
 			}

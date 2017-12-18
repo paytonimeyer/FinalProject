@@ -1,3 +1,5 @@
+//...STAR BACKGROUND LAYER...// 
+
 var stargrid = [];
 var index = 0;
 
@@ -18,31 +20,17 @@ function gridOfStars() {
   }
 }
 
-//Moving rect grid background - this is actually a class for just one rectangle with methods.
-//I will create the grid with a for loop by passing its location variables into it's constructor. 
+/*Star Class was originally built to make the stars shine and twinkle
+but it slowed the program down too much so this element was killed*/
+//Simplified Star Class
 function Star(tempX, tempY, tempW) {
   //x and y positions 
   this.xPos = tempX;
   this.yPos = tempY;
   this.ellW = tempW;
 
-  //opactiy
-  //this.o = tempO;
-
-  //time for variance in noise
-  this.time = 0.0;  
-    
-  //incrementor 
-  this.increment = .01;
-    
-  //initally each rect will start with a random corner radius
-  //this.cornerVariance = random(5,50);
-
-  //the speed in which each corner will soften
-  //this.speedCorner = .5;  
 
   this.show = function() {  
-
 
     noStroke();
     fill(255,255,255,127);
@@ -74,10 +62,9 @@ function starRotationBG(){
   push();
   translate(width/2, height/2);
   rotate(radians(r15));
-  pushPaintClass();
+  pushShootingStarsClass();
   pop();
 
   volumeSwitch();
- //garbageMan();
 }
 

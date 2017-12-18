@@ -14,6 +14,7 @@ function preload(){
 
   //Fonts
   brandon = loadFont('assets/fonts/BrandonGrotesqueRegular.otf');
+  brandonBold = loadFont('assets/fonts/BrandonGrotesqueBold.otf');
 
   //Sound FX
   musicMain = loadSound("assets/sound/bgMusic.mp3");
@@ -44,12 +45,12 @@ function preload(){
   nukespin = loadAnimation("assets/nuke-spin/nuke-spin-1.png", "assets/nuke-spin/nuke-spin-7.png");
   satellitespin = loadAnimation("assets/satellite-rotate/satellite-rotate-01.png", "assets/satellite-rotate/satellite-rotate-20.png");
 
-  //var bjorkWalk = bjork.addAnimation("walking", "assets/bjork-walk/bjork-walk-20.png", "assets/bjork-walk/bjork-walk-01.png");
-
   //BG Elements
   bigRedPlanetImg = loadImage("assets/big-red-planet.png");
   satelliteIMG = loadImage("assets/satellite.png");
   bigRedPlanetImg = loadImage("assets/big-red-planet.png");
+  littlebluePlanetImg = loadImage("assets/littleblueplanet.png");
+  littlepurplePlanetImg = loadImage("assets/tiny-purple-planet.png");
 
   //Interactive Game elements
   play = loadImage("assets/play.png");
@@ -69,16 +70,19 @@ function preload(){
 
 
 function setup() {
-	musicMain.loop(0, 1, 0.1,);
+	//Start main bg music
+  musicMain.loop(0, 1, 0.1,);
 
 	createCanvas(1500,1000);
-	gridOfStars();
+	
+  //Star BG 
+  gridOfStars();
 
-  //firstPlankSetup();
+
 	plankSetup();
+
   volSugarSetup();
-	//bjorkSetup();
-  //unSetup();
+
 }
 
 function draw() {
@@ -97,7 +101,6 @@ function mousePressed(){
    if(mouseX < 100 && mouseX > 0 && mouseY < 100 && mouseY > 0){
       volOnBool = !volOnBool;
    }
-
 
  	 //hit start button to play game 
  	 if(mouseX < width/2+60 && mouseX > width/2-60 && mouseY < height/2+115 && mouseY > height/2+75 && state1 === true){
@@ -127,7 +130,7 @@ function mousePressed(){
       }
     }
     
-    //Play flame sound effect if Volume is on
+    //Play flame sound effect if Volume is ON
     if(gamePlayBool && volOnBool) {
 
         flame.loop();
@@ -135,7 +138,7 @@ function mousePressed(){
     }
 }
 
-
+//Stop Flame sound effect when not clicking
 function mouseReleased() {
   if(gamePlay && volOnBool) {
     flame.stop();
@@ -143,7 +146,7 @@ function mouseReleased() {
 }
 
 
-//User Interactions
+//User Interactions/Volume ON/OFF
 function volumeSwitch(){
 
   if (volOnBool) {
